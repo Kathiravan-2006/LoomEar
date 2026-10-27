@@ -1,0 +1,7 @@
+{
+  "figure_name": "03_acoustic_feature_distributions.png",
+  "caption": "Acoustic feature distributions by condition state. Mann-Whitney U test on Kurtosis p-value = 1.1887e-08.",
+  "source_type": "synthetic",
+  "units": "Normalized amplitude, Frequency (Hz), Time (s)",
+  "dpi": 300
+}

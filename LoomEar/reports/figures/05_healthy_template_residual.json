@@ -1,0 +1,7 @@
+{
+  "figure_name": "05_healthy_template_residual.png",
+  "caption": "Learned healthy template vs cycle-synchronous residual heatmap highlighting localized high-frequency energy surge.",
+  "source_type": "synthetic",
+  "units": "Normalized amplitude, Frequency (Hz), Time (s)",
+  "dpi": 300
+}

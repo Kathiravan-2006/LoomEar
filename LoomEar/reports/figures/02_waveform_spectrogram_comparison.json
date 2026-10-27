@@ -1,0 +1,7 @@
+{
+  "figure_name": "02_waveform_spectrogram_comparison.png",
+  "caption": "Comparative waveforms and log-mel spectrograms for healthy baseline vs bearing wear and beat-up looseness.",
+  "source_type": "synthetic",
+  "units": "Normalized amplitude, Frequency (Hz), Time (s)",
+  "dpi": 300
+}

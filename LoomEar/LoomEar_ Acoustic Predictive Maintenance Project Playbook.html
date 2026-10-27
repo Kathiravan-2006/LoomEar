@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LoomEar: Acoustic Predictive Maintenance for Power Looms, Project Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#14213D; --muted:#53627C; --line:#D5DBE4;
+  --accent:#A9631C; --ok:#177A68; --bad:#B93A28; --hero:#14213D; --hero-ink:#EEF1F6; --block:#EAEEF4;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --text:"Newsreader",Georgia,"Times New Roman",serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0E1626;--surface:#16213A;--ink:#E6EAF2;--muted:#9AA7BF;--line:#2B3A59;--accent:#E0A060;--ok:#3FC3A8;--bad:#F07C69;--hero:#0A1020;--hero-ink:#EEF1F6;--block:#1B2742;}
+}
+:root[data-theme="dark"]{--bg:#0E1626;--surface:#16213A;--ink:#E6EAF2;--muted:#9AA7BF;--line:#2B3A59;--accent:#E0A060;--ok:#3FC3A8;--bad:#F07C69;--hero:#0A1020;--hero-ink:#EEF1F6;--block:#1B2742;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:19px;line-height:1.62}
+a{color:var(--accent)}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.12;margin:0 0 .5em;letter-spacing:-.01em}
+h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800}
+h3{font-size:1.3rem;font-weight:600;margin-top:2em}
+p{margin:0 0 1em;max-width:70ch}
+ul,ol{max-width:70ch;padding-left:1.25em;margin:0 0 1em}
+li{margin-bottom:.35em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);position:relative;overflow:hidden}
+.hero .wrap{padding-top:clamp(48px,9vw,110px);padding-bottom:0}
+.hero h1{font-size:clamp(2.6rem,8.5vw,6.2rem);font-weight:800;max-width:14ch;margin-bottom:.25em;letter-spacing:-.03em}
+.hero .sub{font-size:clamp(1.1rem,2.2vw,1.45rem);max-width:46ch;opacity:.86;margin-bottom:1.4em}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--display);font-size:.92rem;opacity:.75;margin-bottom:26px}
+.loom{display:block;width:100%;height:auto;margin-top:10px}
+.loom .warp{stroke:#8FA3C9;stroke-opacity:.28;stroke-width:1}
+.loom .ok{stroke:#E3A15B;fill:none;stroke-width:2.2;stroke-linecap:round}
+.loom .fault{stroke:#F07C69;fill:none;stroke-width:2.6;stroke-linecap:round}
+.loom .ok,.loom .fault{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 2.8s cubic-bezier(.5,.1,.2,1) .3s forwards}
+.loom .fault{animation-delay:2.4s;animation-duration:1.1s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.loom .ok,.loom .fault{animation:none;stroke-dashoffset:0}html{scroll-behavior:auto}}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.nav .wrap{display:flex;align-items:center;gap:6px;overflow-x:auto;padding-top:8px;padding-bottom:8px;scrollbar-width:thin}
+.nav a{font-family:var(--display);font-size:.92rem;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 12px;border-radius:999px;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{background:var(--block);outline:none}
+.nav .prog{margin-left:auto;font-family:var(--display);font-size:.85rem;color:var(--muted);white-space:nowrap;padding-left:12px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+section.part{padding:clamp(48px,8vw,92px) 0;border-bottom:1px solid var(--line)}
+.lede{font-size:1.25rem;color:var(--ink)}
+.note{border-left:4px solid var(--accent);background:var(--block);padding:14px 18px;margin:1.4em 0;max-width:70ch;border-radius:0 6px 6px 0}
+.note b{font-family:var(--display)}
+.warn{border-left-color:var(--bad)}
+.good{border-left-color:var(--ok)}
+
+/* tables */
+.tw{overflow-x:auto;margin:1.2em 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.95rem;line-height:1.45}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600;background:var(--block);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+
+/* phase list */
+.phase{display:grid;grid-template-columns:auto 1fr;gap:0 22px;margin:2.2em 0 0}
+.phase .n{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);min-width:2.2ch}
+.phase h3{margin:0 0 .3em}
+.phase .out{font-size:.95rem;color:var(--muted);margin-bottom:.8em}
+@media (max-width:560px){.phase{grid-template-columns:1fr}.phase .n{font-size:1.8rem;margin-bottom:6px}}
+
+/* prompt blocks */
+.prompt{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:1em 0 1.6em;overflow:hidden;max-width:100%}
+.prompt header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 16px;background:var(--block);font-family:var(--display);font-size:.88rem;font-weight:600}
+.prompt button{font:inherit;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 14px;cursor:pointer;min-height:36px}
+.prompt button:hover{border-color:var(--accent)}
+.prompt pre{margin:0;padding:16px 18px;white-space:pre-wrap;word-wrap:break-word;font-family:var(--text);font-size:.98rem;line-height:1.55;max-height:460px;overflow:auto}
+.tree{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;background:var(--block);padding:16px 18px;border-radius:8px;overflow-x:auto;white-space:pre;max-width:100%}
+
+/* checklist */
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:8px;cursor:pointer;max-width:80ch}
+.chk input{margin-top:.45em;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.chk span{font-size:1rem;line-height:1.45}
+.chk:has(input:checked) span{color:var(--muted);text-decoration:line-through}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:1.4em 0}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.box h4{font-size:1.08rem;margin-bottom:.4em}
+.box p,.box ul{font-size:.97rem;margin-bottom:.5em}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-bottom:10px;max-width:80ch}
+summary{font-family:var(--display);font-weight:600;cursor:pointer}
+details p{margin:.7em 0 0;font-size:1rem}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;width:90px;display:inline-block;vertical-align:middle;margin-left:6px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.95rem}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--block);padding:1px 6px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="meta"><span>Data science capstone playbook</span><span>Textile machinery, condition monitoring</span><span>Built for Antigravity</span></div>
+    <h1>Listen to the loom before it breaks.</h1>
+    <p class="sub">LoomEar: acoustic predictive maintenance for power looms. A complete path from first recording to viva, with every prompt, template and checklist you need to submit.</p>
+  </div>
+  <svg class="loom" id="loomsvg" viewBox="0 0 1200 220" preserveAspectRatio="none" role="img" aria-label="A sound waveform woven through warp threads. The waveform is steady, then a red burst marks a developing fault."></svg>
+</header>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a href="#how">How to use</a>
+    <a href="#antigravity">Antigravity setup</a>
+    <a href="#foundation">Project foundation</a>
+    <a href="#data">Data plan</a>
+    <a href="#method">Method</a>
+    <a href="#prompts">Prompt playbook</a>
+    <a href="#report">Report kit</a>
+    <a href="#submit">Submission</a>
+    <a href="#viva">Viva</a>
+    <span class="prog" id="prog">Progress 0%<span class="bar"><i id="progbar"></i></span></span>
+  </div>
+</nav>
+
+<main>
+
+<section class="part" id="how"><div class="wrap">
+  <h2>How to use this playbook</h2>
+  <p class="lede">This page is both your project plan and your prompt library. You work through the phases in order, paste each prompt into Antigravity, review what the agent produces, and file the evidence into your report.</p>
+  <div class="grid2">
+    <div class="box"><h4>What you will have at the end</h4>
+      <ul><li>A working pipeline that turns loom audio into a 0 to 100 health score</li><li>Trained, evaluated and explained models</li><li>A live dashboard and an API</li><li>A full report, slides, model card, data card and viva notes</li></ul></div>
+    <div class="box"><h4>What makes it stand out</h4>
+      <ul><li>Pick-cycle-synchronous analysis, a method built around how a loom actually works</li><li>Honest three-source data strategy (real, public, simulated)</li><li>Leave-one-machine-out testing, the test most student projects skip</li><li>A maintenance cost simulator that turns scores into money</li></ul></div>
+  </div>
+  <div class="note warn"><b>One rule examiners care about.</b> Never present simulated data as real, and never invent a result. Every number in your report must trace to a file the pipeline produced. The prompts below force the agent to follow this too.</div>
+  <p>Tick the boxes in the submission checklist as you go. Your progress is saved in this browser.</p>
+</div></section>
+
+<section class="part" id="antigravity"><div class="wrap">
+  <h2>Setting up Antigravity for this project</h2>
+  <p class="lede">Antigravity is an agent-first IDE. You describe a goal, the agent writes a plan, edits files, runs code and shows you what it did. Your job is to be the reviewer.</p>
+  <h3>Workflow for every phase</h3>
+  <ol>
+    <li>Open your project folder as the workspace, with the project rules file in place (below).</li>
+    <li>Paste the phase prompt. Use Planning mode for any phase that creates or restructures many files, and Fast mode for small fixes.</li>
+    <li>Read the implementation plan the agent produces before you approve it. Change anything that does not match your scope.</li>
+    <li>Let it run, then read the task list and walkthrough it leaves behind. Open the figures and logs yourself.</li>
+    <li>Run the tests. Commit to Git with a message naming the phase.</li>
+    <li>Copy the key findings into <code>docs/logbook.md</code>. This is the raw material for your report.</li>
+  </ol>
+  <h3>Use parallel agents wisely</h3>
+  <p>The Agent Manager lets you run several agents at once. A sensible split is one agent on data and features, one on modelling, and one on documentation. Give each its own folder to avoid edit conflicts.</p>
+  <div class="note"><b>Menus change.</b> Antigravity is updated often, so if a button or folder name differs from what is described here, ask the agent how the current version handles rules and workflows, or check Google's Antigravity documentation.</div>
+
+  <h3>Step zero: the rules file</h3>
+  <p>Save this as an always-on workspace rule (commonly <code>.agent/rules/project.md</code>) so every prompt inherits it.</p>
+  <div class="prompt"><header>Project rules file</header><pre>PROJECT: LoomEar, acoustic predictive maintenance for power looms.
+
+ROLE: You are a senior data scientist and ML engineer helping me build a university capstone project that must be reproducible, honest and well documented.
+
+CODING STANDARDS
+- Python 3.11, src layout, type hints, short docstrings, no notebooks as the only source of logic (notebooks import from src).
+- All settings live in configs/*.yaml. No magic numbers in code.
+- Set and log random seeds. Pin dependencies in requirements.txt.
+- Use pathlib, logging (not print), and pytest for tests.
+
+DATA AND EVALUATION INTEGRITY
+- Split by recording session and by machine, never by random audio frame. Frames from the same recording must never appear in both train and test.
+- Fit scalers, thresholds and any learned transform on training data only.
+- Label every dataset as real, public, or synthetic in a metadata column and in every figure caption.
+- Never fabricate, round up or hand-type a result. Metrics must be written by code to reports/metrics/*.json and read from there when writing documents.
+- If a result looks too good (AUC above 0.98 on real data), stop and audit for leakage before continuing.
+
+OUTPUT CONVENTIONS
+- Figures saved to reports/figures at 300 dpi, readable axis labels, units, and a caption sidecar file.
+- After each phase write docs/phase_NN_summary.md: what was done, decisions, results, limitations.
+- Keep a docs/logbook.md with dated entries.
+- Explain every non-obvious decision in plain English so I can defend it in a viva.</pre></div>
+</div></section>
+
+<section class="part" id="foundation"><div class="wrap">
+  <h2>Project foundation</h2>
+  <h3>Title and tagline</h3>
+  <p><b>LoomEar: Acoustic Predictive Maintenance for Power Looms using Cycle-Synchronous Audio Analytics and Anomaly Detection.</b></p>
+  <p><i>A microphone, a model and a maintenance decision, delivered before the breakdown.</i></p>
+
+  <h3>Problem statement</h3>
+  <p>Power looms run for long shifts at hundreds of picks per minute. Bearings wear, belts slip, timing drifts and lubrication fails, and each of these changes the machine's sound well before it stops. Most mills still rely on breakdown repair or fixed-interval servicing, which causes unplanned downtime, fabric defects and wasted maintenance. Vibration sensors work but are costly to install on every loom. A low-cost microphone can capture the same early warnings, but factory noise, many neighbouring machines and scarce fault labels make the problem hard.</p>
+
+  <h3>Objectives</h3>
+  <ol>
+    <li>Build a reproducible pipeline that records, cleans and segments loom audio into pick cycles.</li>
+    <li>Engineer time, frequency and cycle-synchronous features that capture early mechanical degradation.</li>
+    <li>Train anomaly detectors that learn from healthy sound alone, and classifiers for known fault types where labels exist.</li>
+    <li>Convert model output into a stable 0 to 100 health index with Healthy, Watch and Act states.</li>
+    <li>Prove generalisation by testing on machines the model has never heard.</li>
+    <li>Deliver a dashboard, an API and an edge-device prototype, and quantify the maintenance savings.</li>
+  </ol>
+
+  <h3>Scope</h3>
+  <div class="grid2">
+    <div class="box"><h4>In scope</h4><ul><li>Airborne sound from one or more looms (rapier, projectile, air-jet or shuttle, state which)</li><li>Anomaly detection, fault classification, health index</li><li>Offline evaluation and a near-real-time demo</li></ul></div>
+    <div class="box"><h4>Out of scope</h4><ul><li>Fabric defect detection by camera</li><li>Remaining useful life prediction as a guaranteed number (shown as a trend only)</li><li>Production-grade deployment across a whole mill</li></ul></div>
+  </div>
+
+  <h3>The unique idea: pick-cycle-synchronous analysis</h3>
+  <p>A loom is periodic. Every pick (one pass of weft) repeats the same sequence of mechanical events: shedding, weft insertion, beat-up. Most audio projects chop sound into arbitrary fixed windows and lose this structure. LoomEar does three things differently:</p>
+  <ol>
+    <li><b>Find the pick period.</b> Estimate it from the autocorrelation of the signal envelope.</li>
+    <li><b>Fold the audio into cycles.</b> Each cycle is time-warped to a fixed length so cycle position means the same event on every pick.</li>
+    <li><b>Compare against a healthy template.</b> Average many healthy cycles into a template. The residual between a live cycle and the template shows <i>where in the pick</i> and <i>at what frequency</i> something has changed.</li>
+  </ol>
+  <p>That residual doubles as an explanation: a heatmap you can show a mechanic that says "extra energy at beat-up, 3 to 6 kHz, growing for two weeks". Few student projects can offer that.</p>
+
+  <h3>Fault library</h3>
+  <p>Use this table to define your fault classes and to justify each feature you build. Confirm signatures against your own recordings, because they vary by loom type.</p>
+  <div class="tw"><table>
+    <tr><th>Fault</th><th>What you tend to hear</th><th>Likely cause</th><th>Features that catch it</th></tr>
+    <tr><td>Bearing wear</td><td>Rising broadband hiss in the upper kHz range, periodic clicks</td><td>Fatigue, contamination, poor lubrication</td><td>Kurtosis, crest factor, high-band energy, envelope spectrum</td></tr>
+    <tr><td>Timing drift</td><td>Impacts arriving earlier or later inside the pick</td><td>Cam or linkage wear, loose settings</td><td>Cycle-synchronous envelope shift, residual heatmap</td></tr>
+    <tr><td>Loose or slipping belt</td><td>Narrowband squeal, amplitude wobble</td><td>Tension loss, glazing</td><td>Spectral peaks, tonality, modulation spectrum</td></tr>
+    <tr><td>Lubrication starvation</td><td>Harsher, brighter friction noise</td><td>Missed oiling, oil breakdown</td><td>Spectral centroid, rolloff, band ratio</td></tr>
+    <tr><td>Beat-up looseness</td><td>Heavier or doubled thud, extra low-frequency energy</td><td>Worn reed or sley mounts</td><td>Low-band energy at beat-up, double-peak count</td></tr>
+    <tr><td>Loose fasteners or frame</td><td>Rattles between picks</td><td>Vibration loosening bolts</td><td>Inter-pick transients, spectral flux</td></tr>
+  </table></div>
+
+  <h3>Technology stack</h3>
+  <div class="tw"><table>
+    <tr><th>Layer</th><th>Choice</th><th>Why</th></tr>
+    <tr><td>Audio</td><td>librosa, scipy, soundfile, noisereduce</td><td>Standard, well documented</td></tr>
+    <tr><td>Classical ML</td><td>scikit-learn, XGBoost</td><td>Strong baselines, fast, explainable</td></tr>
+    <tr><td>Deep learning</td><td>PyTorch (convolutional autoencoder, small CNN)</td><td>Flexible, works on CPU for small data</td></tr>
+    <tr><td>Pretrained audio</td><td>YAMNet or PANNs embeddings (optional)</td><td>Transfer learning when data is scarce</td></tr>
+    <tr><td>Explainability</td><td>SHAP, reconstruction-error heatmaps</td><td>Mechanics trust what they can read</td></tr>
+    <tr><td>Serving</td><td>FastAPI, Streamlit</td><td>Quick API and a dashboard for the demo</td></tr>
+    <tr><td>Edge</td><td>Raspberry Pi, USB or MEMS microphone, ONNX Runtime</td><td>Low-cost real deployment story</td></tr>
+    <tr><td>MLOps</td><td>Git, DVC or plain data folders, MLflow, pytest, GitHub Actions</td><td>Reproducibility marks</td></tr>
+  </table></div>
+
+  <h3>Repository layout</h3>
+<div class="tree">loomear/
+├── .agent/rules/project.md
+├── configs/            data.yaml  features.yaml  models.yaml
+├── data/
+│   ├── raw/            real/  public/  synthetic/
+│   ├── interim/
+│   └── processed/
+├── src/loomear/
+│   ├── data/           loaders.py  simulator.py  splits.py
+│   ├── audio/          preprocess.py  cycles.py  augment.py
+│   ├── features/       handcrafted.py  spectro.py  embeddings.py
+│   ├── models/         baselines.py  autoencoder.py  classifier.py
+│   ├── health/         index.py  decision.py  cost_model.py
+│   ├── eval/           metrics.py  robustness.py  explain.py
+│   └── serve/          api.py  stream.py
+├── app/dashboard.py
+├── edge/               record_and_score.py  export_onnx.py
+├── notebooks/          01_eda.ipynb  02_cycles.ipynb
+├── reports/            figures/  metrics/  tables/
+├── docs/               logbook.md  data_card.md  model_card.md  report/
+├── tests/
+├── requirements.txt
+├── Makefile
+└── README.md</div>
+</div></section>
+
+<section class="part" id="data"><div class="wrap">
+  <h2>Data plan</h2>
+  <p class="lede">The hardest part of this project is data. Fault recordings are rare and mills do not hand them out. So you use three sources, each for a different job, and you label them honestly.</p>
+  <div class="tw"><table>
+    <tr><th>Source</th><th>Role</th><th>Details</th></tr>
+    <tr><td>Real loom recordings</td><td>Primary evidence</td><td>Healthy baseline over several days and shifts, plus any faulty or pre-maintenance periods. Pair every session with the maintenance log.</td></tr>
+    <tr><td>Public machine-sound benchmarks</td><td>Validate your method where fault labels exist</td><td>Datasets such as MIMII (pumps, fans, valves, slide rails) and the DCASE anomalous sound detection challenge data. Check each licence and cite correctly.</td></tr>
+    <tr><td>Synthetic loom simulator</td><td>Controlled fault injection and augmentation</td><td>Periodic impact trains at the pick rate, with injected fault signatures and mixed with recorded mill ambience at chosen signal-to-noise ratios. Always labelled synthetic.</td></tr>
+  </table></div>
+
+  <h3>Recording protocol</h3>
+  <ul>
+    <li>Microphone 30 to 50 cm from the beat-up and main drive zone, on a fixed tripod, same position every session. Record the position in metadata.</li>
+    <li>Mono or stereo WAV, 16-bit, 44.1 or 48 kHz. Keep a raw copy untouched.</li>
+    <li>Sessions of 10 minutes or more, repeated across shifts and days, to capture normal variation in fabric, speed and ambient noise.</li>
+    <li>Log for each session: machine ID, loom type, rpm or picks per minute, fabric and yarn, shift, microphone position, maintenance status, and who labelled it.</li>
+    <li>Record a mill-ambience clip with the loom off, for noise augmentation.</li>
+    <li>Safety and ethics: stay clear of moving parts, wear hearing protection, get written permission from the mill, and remove or avoid recording identifiable speech.</li>
+  </ul>
+  <div class="note good"><b>If you cannot get fault data.</b> That is normal. Frame the study as healthy-only anomaly detection on real data, validate on public benchmarks, and use simulation for fault stress tests. Say this plainly in the limitations section. Honesty scores better than a fake fault set.</div>
+
+  <h3>Metadata schema</h3>
+  <p>Every audio file gets one row: <code>file_id, source_type (real/public/synthetic), machine_id, loom_type, rpm, session_id, date, shift, mic_position, condition (healthy/watch/fault), fault_type, label_source (log/expert/injected), snr_db, notes</code>.</p>
+</div></section>
+
+<section class="part" id="method"><div class="wrap">
+  <h2>Method</h2>
+  <h3>Pipeline stages</h3>
+  <ol>
+    <li><b>Acquire.</b> Load audio, validate sample rate and duration, drop corrupt files.</li>
+    <li><b>Clean.</b> Resample to 16 or 22.05 kHz, apply a band-pass (for example 50 Hz to 8 kHz), remove DC offset, and normalise per recording. Optionally reduce stationary noise, and compare with and without to prove it helps.</li>
+    <li><b>Segment into pick cycles.</b> Envelope, autocorrelation, period estimate, then fold and time-normalise.</li>
+    <li><b>Extract features.</b> Handcrafted, log-mel spectrogram, and cycle-synchronous residual.</li>
+    <li><b>Model.</b> Baselines, then deep models, then optional pretrained embeddings.</li>
+    <li><b>Score and decide.</b> Anomaly score to health index, smoothing, thresholds, alerts.</li>
+    <li><b>Explain and evaluate.</b> Metrics, robustness, heatmaps, SHAP.</li>
+    <li><b>Serve.</b> API, dashboard, edge prototype, cost simulation.</li>
+  </ol>
+
+  <h3>Feature families</h3>
+  <div class="tw"><table>
+    <tr><th>Family</th><th>Examples</th></tr>
+    <tr><td>Time domain</td><td>RMS, peak, crest factor, kurtosis, skewness, zero-crossing rate, impulse count</td></tr>
+    <tr><td>Frequency domain</td><td>Spectral centroid, bandwidth, rolloff, flatness, flux, band energy ratios, dominant peaks</td></tr>
+    <tr><td>Perceptual</td><td>MFCCs and deltas, log-mel spectrogram</td></tr>
+    <tr><td>Envelope and modulation</td><td>Hilbert envelope spectrum, modulation spectrum</td></tr>
+    <tr><td>Cycle-synchronous</td><td>Cycle template, residual map, timing offset of main impacts, cycle-to-cycle variance</td></tr>
+  </table></div>
+
+  <h3>Model ladder</h3>
+  <p>Build from simple to complex and report every rung. A simple model that nearly matches a deep one is itself a finding.</p>
+  <div class="tw"><table>
+    <tr><th>Rung</th><th>Model</th><th>Learns from</th><th>Purpose</th></tr>
+    <tr><td>1</td><td>Threshold on RMS and kurtosis</td><td>Healthy</td><td>Trivial baseline to beat</td></tr>
+    <tr><td>2</td><td>PCA reconstruction error, Isolation Forest, One-Class SVM</td><td>Healthy</td><td>Classical anomaly detection</td></tr>
+    <tr><td>3</td><td>Random Forest, XGBoost on handcrafted features</td><td>Labelled faults</td><td>Fault type classification</td></tr>
+    <tr><td>4</td><td>Convolutional autoencoder on log-mel and cycle residual</td><td>Healthy</td><td>Main anomaly model</td></tr>
+    <tr><td>5</td><td>Small CNN on spectrograms</td><td>Labelled faults</td><td>Deep classification</td></tr>
+    <tr><td>6</td><td>Pretrained audio embeddings plus a light classifier</td><td>Either</td><td>Transfer learning when data is small</td></tr>
+  </table></div>
+
+  <h3>Health index and decision logic</h3>
+  <ol>
+    <li>Compute the anomaly score for each cycle.</li>
+    <li>Convert to a 0 to 100 index using percentiles of healthy validation scores, so 50 means "typical of the healthy upper range" rather than an arbitrary number.</li>
+    <li>Smooth with an exponentially weighted moving average, and require several consecutive high readings before changing state (hysteresis), to avoid false alarms.</li>
+    <li>States: Healthy, Watch, Act. Choose thresholds on validation data to hit a target false-alarm rate, and state that rate in the report.</li>
+    <li>Plot the index over days. A rising trend is the predictive part of predictive maintenance.</li>
+  </ol>
+
+  <h3>Evaluation design</h3>
+  <div class="tw"><table>
+    <tr><th>Question</th><th>Test</th><th>Metric</th></tr>
+    <tr><td>Does it detect faults?</td><td>Held-out sessions</td><td>ROC AUC, partial AUC at low false-positive rate, recall at fixed false-alarm rate</td></tr>
+    <tr><td>Does it classify fault types?</td><td>Stratified, session-grouped cross-validation</td><td>Macro F1, per-class recall, confusion matrix</td></tr>
+    <tr><td>Does it work on a new machine?</td><td>Leave-one-machine-out</td><td>Same metrics, reported per machine</td></tr>
+    <tr><td>Does it survive factory noise?</td><td>Add ambience at 20, 10, 5, 0 dB SNR</td><td>Metric versus SNR curve</td></tr>
+    <tr><td>Does it warn early?</td><td>Run on recordings leading up to a known fault</td><td>Lead time in hours or days before the logged failure</td></tr>
+    <tr><td>Can it run live?</td><td>Time one scoring call on the edge device</td><td>Latency, CPU use, model size</td></tr>
+    <tr><td>Is each component useful?</td><td>Ablation: remove cycle sync, noise reduction, each feature family</td><td>Metric change per ablation</td></tr>
+  </table></div>
+
+  <h3>Business case</h3>
+  <p>Estimate savings with a simple, transparent model. Let <i>C<sub>d</sub></i> be the cost per hour of unplanned downtime, <i>H<sub>u</sub></i> the unplanned downtime hours per loom per year, <i>d</i> the fraction of those failures caught early by the system, and <i>C<sub>s</sub></i> the cost of the sensing system per loom per year. Annual saving per loom is roughly <i>d × H<sub>u</sub> × C<sub>d</sub> − C<sub>s</sub> − false-alarm cost</i>. Use real figures from your mill contact, state your assumptions, and show a sensitivity table.</p>
+</div></section>
+
+<section class="part" id="prompts"><div class="wrap">
+  <h2>Antigravity prompt playbook</h2>
+  <p class="lede">Thirteen phases. Paste the rules file first, then each prompt in order. Each prompt ends with a request for a phase summary, so your documentation builds itself.</p>
+
+  <div class="phase"><div class="n">1</div><div>
+    <h3>Scaffold the project</h3><p class="out">Output: repository, environment, configs, Makefile, empty tested modules.</p>
+    <div class="prompt"><header>Prompt 1: scaffold</header><pre>Create the LoomEar repository using the folder layout below. Use Python 3.11 and a src layout.
+
+[paste the repository layout from the playbook]
+
+Tasks:
+1. Create requirements.txt with: numpy, scipy, pandas, librosa, soundfile, noisereduce, scikit-learn, xgboost, torch, matplotlib, seaborn, shap, mlflow, pyyaml, pytest, fastapi, uvicorn, streamlit, onnx, onnxruntime.
+2. Create configs/data.yaml, features.yaml, models.yaml with sensible documented defaults (sample rate 16000, band-pass 50 to 8000 Hz, seed 42).
+3. Create a Makefile with targets: setup, data, features, train, evaluate, app, test.
+4. Add stub modules with docstrings and function signatures, and one passing smoke test per package.
+5. Write README.md with the project goal, quick start, and the folder map.
+6. Initialise Git with a sensible .gitignore (exclude data/raw and model weights).
+
+Produce an implementation plan first. When done, write docs/phase_01_summary.md and add the first dated entry to docs/logbook.md.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">2</div><div>
+    <h3>Build the data layer and simulator</h3><p class="out">Output: loaders, metadata validation, synthetic loom generator, session-aware splits.</p>
+    <div class="prompt"><header>Prompt 2: data and simulator</header><pre>Build the data layer.
+
+A. Loaders and validation
+- Write loaders.py to read WAV files and a metadata.csv with the schema: file_id, source_type, machine_id, loom_type, rpm, session_id, date, shift, mic_position, condition, fault_type, label_source, snr_db, notes.
+- Validate: sample rate, duration, missing files, duplicate IDs, NaNs. Fail loudly with clear messages.
+- Add an optional loader for a public benchmark (MIMII or DCASE) that maps its labels to our schema with source_type = public.
+
+B. Synthetic loom simulator (simulator.py)
+- Generate a healthy loom sound: a periodic train of impacts at a configurable pick rate (picks per minute) with harmonics, short decaying resonances, small random jitter and amplitude variation.
+- Fault injectors, each with a severity parameter from 0 to 1: bearing wear (rising high-band noise plus periodic clicks), timing drift (shift of the main impact inside the cycle), belt squeal (narrowband tone with amplitude modulation), lubrication loss (brightening of spectrum), beat-up looseness (heavier and doubled impact), loose frame (rattles between picks).
+- A mixer that adds recorded or generated ambience at a chosen SNR.
+- Every output file must be written with source_type = synthetic and the injected parameters stored in metadata.
+- Include a notebook that plays and plots one example of each fault and compares it to healthy.
+
+C. Splits (splits.py)
+- Provide group splits by session and by machine, plus leave-one-machine-out. Add a test that proves no session_id appears in both train and test.
+
+Plan first. Then implement, test, and write docs/phase_02_summary.md including a clear statement on what is real, public, and synthetic.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">3</div><div>
+    <h3>Exploratory data analysis</h3><p class="out">Output: EDA notebook, figures, data card.</p>
+    <div class="prompt"><header>Prompt 3: EDA and data card</header><pre>Perform exploratory analysis on all available audio and produce publication-quality figures.
+
+Include:
+1. Dataset overview tables: counts by source_type, machine, condition, fault_type, session, total hours.
+2. Waveform, spectrogram and power spectrum examples for healthy versus each fault, side by side, with annotations.
+3. Distribution plots of RMS, crest factor, kurtosis and spectral centroid per condition. Run a simple statistical test (for example Mann-Whitney U) and report effect sizes.
+4. Check for confounders: does microphone position, shift, rpm or fabric differ systematically between healthy and faulty recordings? A model must not learn "Tuesday shift" instead of "bearing wear". Report any confound found.
+5. Ambient noise analysis: spectrum of the loom-off ambience clip.
+6. Pick-rate analysis: estimate the pick period per recording and compare with logged rpm.
+
+Save all figures to reports/figures with caption sidecar files. Then generate docs/data_card.md with: purpose, sources, collection method, size, label quality, known biases, ethical notes, licence, and limitations.
+
+Write docs/phase_03_summary.md listing the 5 most important findings and what they imply for modelling.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">4</div><div>
+    <h3>Preprocessing and pick-cycle segmentation</h3><p class="out">Output: cleaned audio, cycle extractor, healthy templates. This is your signature contribution.</p>
+    <div class="prompt"><header>Prompt 4: cycle-synchronous analysis</header><pre>Implement the pick-cycle-synchronous pipeline in src/loomear/audio/.
+
+preprocess.py
+- Resample, band-pass, DC removal, per-file normalisation, optional stationary noise reduction controlled by config.
+
+cycles.py
+1. Compute the signal envelope (Hilbert or rectified and low-passed).
+2. Estimate the pick period using autocorrelation of the envelope, constrained to a plausible range from the logged rpm. Return a confidence value, and flag low-confidence files.
+3. Detect cycle boundaries by anchoring on the strongest recurring impact (the beat-up event), tolerating drift.
+4. Extract each cycle and time-normalise it to a fixed number of samples (configurable) so position inside the cycle is comparable.
+5. Build a healthy template per machine: the median or mean log-mel spectrogram over many healthy cycles, plus a per-bin standard deviation.
+6. Compute the residual map for any cycle: (cycle minus template) divided by standard deviation.
+
+Validation and figures
+- Plot detected boundaries over the waveform for several files.
+- Plot the template and an example residual for healthy versus each synthetic fault.
+- Report how accurately the estimated period matches the known period in synthetic data.
+- Compare against naive fixed-length windows: does cycle alignment reduce healthy-data variance? Quantify it.
+
+Add unit tests with synthetic signals of known period, including jitter and added noise. Write docs/phase_04_summary.md explaining the method in plain English with a diagram description I can redraw.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">5</div><div>
+    <h3>Feature engineering</h3><p class="out">Output: feature tables, feature selection analysis.</p>
+    <div class="prompt"><header>Prompt 5: features</header><pre>Implement feature extraction in src/loomear/features/.
+
+1. handcrafted.py: time-domain, frequency-domain, MFCC (with deltas), envelope-spectrum and modulation features per cycle, plus cycle-synchronous features: timing offset of the main impact, number of peaks per cycle, cycle-to-cycle variance, residual energy in low, mid and high bands at early, middle and late cycle positions.
+2. spectro.py: log-mel spectrograms per cycle at fixed shape, saved as float16 arrays with an index file.
+3. embeddings.py: optional pretrained audio embeddings (YAMNet or PANNs). Make it skippable if weights are unavailable.
+
+Then analyse:
+- Correlation matrix and variance inflation check.
+- Mutual information with condition on training data only.
+- Permutation importance from a simple model, grouped by session.
+- A short table of the features I should keep and why.
+
+Cache outputs in data/processed with a hash of the config so changes invalidate the cache. Add tests for shape and NaN safety. Write docs/phase_05_summary.md.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">6</div><div>
+    <h3>Baseline models</h3><p class="out">Output: reproducible baseline results every later model must beat.</p>
+    <div class="prompt"><header>Prompt 6: baselines</header><pre>Implement and evaluate baseline models.
+
+Anomaly detection (train on healthy only): threshold on RMS and kurtosis, PCA reconstruction error, Isolation Forest, One-Class SVM. Tune hyperparameters on validation sessions only.
+
+Classification (labelled data): Random Forest and XGBoost for fault type, with class weights for imbalance.
+
+Protocol
+- Use the session-grouped and leave-one-machine-out splits from splits.py.
+- Log every run to MLflow with config, seed, metrics and artifacts.
+- Report ROC AUC, partial AUC (false-positive rate up to 0.1), precision, recall, F1 and, for classification, macro F1 and a confusion matrix.
+- Run each experiment with at least 5 seeds where randomness exists and report mean and standard deviation.
+- Produce one comparison table and one figure, saved to reports/tables and reports/figures.
+
+Be explicit about which results come from real, public or synthetic data and never mix them in one number. Write docs/phase_06_summary.md including what the baselines do well and where they fail.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">7</div><div>
+    <h3>Deep learning models</h3><p class="out">Output: autoencoder, CNN, optional transfer model, training curves.</p>
+    <div class="prompt"><header>Prompt 7: deep models</header><pre>Implement deep models in PyTorch, CPU-friendly with an optional GPU flag.
+
+1. Convolutional autoencoder (autoencoder.py) trained on healthy log-mel cycles and healthy cycle residuals. Anomaly score is mean reconstruction error, and also keep the per-pixel error map for explanation. Include a small config sweep over bottleneck size and depth.
+2. Small CNN classifier (classifier.py) for fault type, with spec augmentation (time and frequency masking), mixup optional, and class-balanced sampling.
+3. Optional light classifier on pretrained embeddings.
+
+Training hygiene
+- Early stopping on a validation set that is separate from the test set, seeded runs, learning-rate scheduling, saved best checkpoints, training and validation curves.
+- Noise augmentation: mix in loom-off ambience at random SNR between 0 and 20 dB.
+- Keep models small enough to run on a Raspberry Pi 4. Report parameter count and model file size.
+
+Evaluate exactly as in phase 6 so numbers are comparable. Run an ablation: with and without cycle alignment, with and without noise augmentation, with and without residual input. Present results in one table. Write docs/phase_07_summary.md with honest commentary on whether deep models truly beat the baselines.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">8</div><div>
+    <h3>Health index and maintenance decisions</h3><p class="out">Output: 0 to 100 index, states, early-warning lead-time analysis.</p>
+    <div class="prompt"><header>Prompt 8: health index</header><pre>Implement the health layer in src/loomear/health/.
+
+index.py
+- Convert anomaly scores to a 0 to 100 health index using percentiles of healthy validation scores (document the mapping).
+- Apply EWMA smoothing and a hysteresis rule: change state only after N consecutive cycles beyond a threshold.
+
+decision.py
+- States Healthy, Watch, Act. Select thresholds on validation data to meet a configurable target false-alarm rate, and store them in a JSON file.
+
+Early warning analysis
+- For every recording sequence that leads up to a known (or simulated progressive) fault, compute how many hours or days before the failure the state first became Watch and Act.
+- Plot the health index over time with fault onset marked.
+
+cost_model.py
+- A transparent calculator using downtime cost per hour, unplanned downtime hours, detection rate, false-alarm cost, sensor cost per loom. Provide a sensitivity table across detection rate and downtime cost, and a plot.
+
+Write docs/phase_08_summary.md with the health-index definition in plain language and the cost-model assumptions clearly flagged as assumptions.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">9</div><div>
+    <h3>Evaluation, robustness and explainability</h3><p class="out">Output: the results chapter, generated by code.</p>
+    <div class="prompt"><header>Prompt 9: final evaluation</header><pre>Create a single reproducible command, make evaluate, that regenerates every result used in the report.
+
+Include:
+1. Final metrics table for all models on the held-out test sessions, with confidence intervals from bootstrap resampling over sessions.
+2. Leave-one-machine-out results per machine, and a short statement on generalisation.
+3. Robustness curve: metric versus SNR (20, 10, 5, 0 dB) using loom-off ambience.
+4. Ablation table.
+5. Explainability: reconstruction-error heatmaps for 3 true detections, 1 false alarm and 1 miss, each with a plain-English caption of what the model saw. SHAP summary for the tree model.
+6. Error analysis: what kinds of recordings fail and why, with examples.
+7. Statistical comparison of the best two models (for example McNemar test or paired bootstrap).
+
+Write all numbers to reports/metrics/final_results.json. Then generate docs/results_draft.md that reads every number from that JSON so nothing is typed by hand. Write docs/phase_09_summary.md including limitations.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">10</div><div>
+    <h3>API and dashboard</h3><p class="out">Output: FastAPI service and Streamlit dashboard for the demo.</p>
+    <div class="prompt"><header>Prompt 10: serving</header><pre>Build the serving layer.
+
+API (src/loomear/serve/api.py, FastAPI)
+- POST /score: accepts a short WAV, returns pick rate, anomaly score, health index, state and the top contributing frequency bands.
+- GET /health: service status. GET /model: model version, training date, metrics, thresholds.
+- Validate input length and format and return helpful errors.
+
+Dashboard (app/dashboard.py, Streamlit)
+- Page 1, Live: upload audio or simulate a stream, show waveform, spectrogram, pick-cycle overlay, health gauge and state.
+- Page 2, Explain: residual heatmap on the latest cycles, with a plain-language note.
+- Page 3, Trend: health index over days for each loom, with Watch and Act zones.
+- Page 4, Fleet: table of all looms sorted by risk.
+- Page 5, Savings: interactive cost model.
+- Include a demo mode that replays a synthetic progressive fault so the demo works without a loom.
+
+Design the dashboard for a mill supervisor: large clear states, minimal jargon, colour-blind-safe palette. Add tests for the API with FastAPI TestClient. Write docs/phase_10_summary.md with screenshots placed in reports/figures.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">11</div><div>
+    <h3>Edge prototype</h3><p class="out">Output: ONNX model and a Raspberry Pi script. Adds a strong real-world story.</p>
+    <div class="prompt"><header>Prompt 11: edge deployment</header><pre>Create an edge prototype in edge/.
+
+1. export_onnx.py: export the trained autoencoder to ONNX, verify outputs match PyTorch within tolerance, and optionally quantise to int8. Report size and accuracy change.
+2. record_and_score.py: capture audio from a USB or MEMS microphone in rolling windows, run preprocessing, pick-cycle detection and ONNX scoring, update the health index, and write results to a local CSV and optionally POST them to the API.
+3. A benchmark script reporting latency per window, CPU use and memory on the target device. Use a clearly labelled fallback if no device is available.
+4. Write edge/README.md with wiring, microphone placement advice, power notes and a bill of materials with approximate costs.
+
+Be explicit about what was tested on real hardware versus only on a laptop. Write docs/phase_11_summary.md.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">12</div><div>
+    <h3>Tests, reproducibility and model card</h3><p class="out">Output: green test suite, CI, model card, reproducibility proof.</p>
+    <div class="prompt"><header>Prompt 12: quality and audit</header><pre>Harden the project.
+
+1. Raise test coverage on core logic (splits, cycles, features, health index, API). Add property tests where useful.
+2. Add a GitHub Actions workflow running lint, tests and a small end-to-end smoke run on synthetic data.
+3. Add a leakage audit script that fails if any session_id or machine_id appears across train and test, if scalers or thresholds were fitted on non-training data, or if any metric file is older than the model it describes.
+4. Verify reproducibility: run the full pipeline twice with the same seed and show that the metrics match.
+5. Write docs/model_card.md covering: intended use, out-of-scope use, training data, metrics by group, limitations, ethical considerations, failure modes and maintenance plan.
+
+Then act as a sceptical external reviewer. List the 10 weakest points of this project that an examiner might attack, rank them by severity, and propose a concrete fix for each. Implement the fixes that are feasible. Write docs/phase_12_summary.md.</pre></div>
+  </div></div>
+
+  <div class="phase"><div class="n">13</div><div>
+    <h3>Report, slides and viva pack</h3><p class="out">Output: the submission documents. See the report kit below for the structure.</p>
+    <div class="prompt"><header>Prompt 13: documentation</header><pre>Write the final project report in docs/report/ as separate Markdown chapter files, then combine them into one document.
+
+Use only facts from the repository: docs/phase_*_summary.md, docs/logbook.md, docs/data_card.md, docs/model_card.md, reports/metrics/final_results.json, and the figures in reports/figures. If a fact is not in the repository, mark it as TODO for me rather than inventing it.
+
+Chapters: Abstract, Introduction, Literature Review (leave citations as TODO placeholders with the search terms I should use), Requirement Analysis, System Design, Data Description and Preprocessing, Methodology, Implementation, Results and Discussion, Deployment, Business Case, Testing, Limitations and Ethics, Conclusion and Future Scope, References, Appendices.
+
+Style: clear academic English, past tense for work done, every figure and table numbered and referenced in the text, every figure has a caption stating its data source type (real, public, synthetic).
+
+Then also produce:
+- docs/slides_outline.md with 15 slides, speaker notes and the figure to use on each.
+- docs/viva_questions.md with 40 likely examiner questions and strong answers grounded in this project.
+- docs/demo_script.md, a 5-minute demo script with exact click path and fallback plan.
+- docs/limitations_and_future_work.md.
+Write docs/phase_13_summary.md and list everything I still need to fill in by hand.</pre></div>
+  </div></div>
+
+  <h3>Rescue prompts</h3>
+  <p>Keep these ready for when something goes wrong.</p>
+  <div class="prompt"><header>Results look too good</header><pre>My model reports unusually high performance. Audit for data leakage. Check: frames from one recording in both train and test, scalers or thresholds fitted before splitting, machine or session identity being learnable from recording conditions (microphone gain, background hum, shift), duplicated files, and labels derived from features. Write a short test for each and report which pass or fail. Do not change any results until I have reviewed your findings.</pre></div>
+  <div class="prompt"><header>Results look too bad</header><pre>Performance is poor. Diagnose step by step before changing the model: check audio loading and sample rate, check pick-period estimation confidence, compare healthy versus faulty feature distributions for separability, check class balance and label quality, check whether the noise level swamps the signal. Rank the likely causes and test the top three with the smallest possible experiments. Show me the evidence for each.</pre></div>
+  <div class="prompt"><header>Explain to me</header><pre>Explain the code you just wrote as if I must defend it in a viva tomorrow. For each major function, give: what it does, why this approach was chosen over the obvious alternative, what could go wrong, and one question an examiner might ask. Keep it plain and specific to this project.</pre></div>
+</div></section>
+
+<section class="part" id="report"><div class="wrap">
+  <h2>Report kit</h2>
+  <p class="lede">The prompts generate drafts. This section tells you what a complete submission contains and gives you starter text you can adapt.</p>
+
+  <h3>Front matter</h3>
+  <ul>
+    <li>Title page: title, your name and register number, programme, guide, department, institution, month and year</li>
+    <li>Bonafide or certificate page (your institution's format, signed)</li>
+    <li>Declaration of originality</li>
+    <li>Acknowledgement</li>
+    <li>Abstract</li>
+    <li>Table of contents, list of figures, list of tables, list of abbreviations</li>
+  </ul>
+
+  <h3>Chapter map and evidence</h3>
+  <div class="tw"><table>
+    <tr><th>Chapter</th><th>What to write</th><th>Evidence comes from</th></tr>
+    <tr><td>1. Introduction</td><td>Textile context, cost of downtime, why acoustic sensing, problem, objectives, scope, contributions</td><td>Foundation section</td></tr>
+    <tr><td>2. Literature review</td><td>Condition monitoring of rotating machinery, acoustic and vibration methods, anomaly detection in sound, textile machine monitoring, research gaps</td><td>Your own paper search (aim for 25 to 40 sources)</td></tr>
+    <tr><td>3. Requirement analysis</td><td>Functional and non-functional requirements, user personas (mill supervisor, maintenance engineer), hardware and software needs, feasibility</td><td>Phase 1 summary</td></tr>
+    <tr><td>4. System design</td><td>Architecture diagram, data flow, module design, database or file design, UI wireframes</td><td>Phases 1, 10</td></tr>
+    <tr><td>5. Data</td><td>Sources, collection protocol, metadata, EDA, ethics, limitations</td><td>Data card, phases 2 and 3</td></tr>
+    <tr><td>6. Methodology</td><td>Preprocessing, cycle synchronisation, features, models, health index</td><td>Phases 4 to 8</td></tr>
+    <tr><td>7. Implementation</td><td>Tools, code structure, key algorithms, training setup, deployment</td><td>Phases 6 to 11</td></tr>
+    <tr><td>8. Results and discussion</td><td>Tables, curves, ablations, robustness, explanations, error analysis, comparison with literature</td><td>final_results.json, phase 9</td></tr>
+    <tr><td>9. Testing</td><td>Test plan, unit and integration tests, leakage audit, reproducibility check</td><td>Phase 12</td></tr>
+    <tr><td>10. Business case</td><td>Cost model, sensitivity, deployment plan</td><td>Phase 8</td></tr>
+    <tr><td>11. Conclusion and future scope</td><td>What was achieved against each objective, limitations, next steps</td><td>All summaries</td></tr>
+    <tr><td>References and appendices</td><td>Citations in one style, code listings, extra figures, data card, model card, user manual, logbook</td><td>docs folder</td></tr>
+  </table></div>
+
+  <h3>Starter abstract</h3>
+  <p>Edit the bracketed items after your results exist.</p>
+  <div class="prompt"><header>Abstract template</header><pre>Unplanned breakdowns of power looms cause costly downtime, fabric defects and inefficient maintenance, yet continuous vibration monitoring of every machine is often too expensive for small and medium mills. This project presents LoomEar, a low-cost acoustic predictive maintenance system that listens to a loom through a single microphone and estimates its mechanical health. Audio was gathered from [number] looms of type [type] over [duration], supplemented by the public [benchmark name] dataset and a physically motivated synthetic loom simulator used for controlled fault injection. A pick-cycle-synchronous method estimates the loom's pick period, folds the signal into time-normalised cycles, and compares each cycle with a healthy template to produce a residual map that shows when in the pick and at which frequencies the sound has changed. Handcrafted features, log-mel spectrograms and residuals were used to train classical anomaly detectors, a convolutional autoencoder and fault classifiers. On held-out sessions the best model achieved [metric] at a false-alarm rate of [value], and on leave-one-machine-out testing it achieved [metric], showing [conclusion about generalisation]. Anomaly scores were converted into a 0 to 100 health index with Healthy, Watch and Act states, giving a mean warning lead time of [value] before logged failures. The system was deployed as a FastAPI service, a Streamlit dashboard and a Raspberry Pi prototype with [latency] scoring time. A cost model suggests annual savings of [range] per loom under stated assumptions. The work shows that [one-sentence takeaway], and identifies limitations in [data size, number of machines, label quality] for future work.
+
+Keywords: predictive maintenance, acoustic monitoring, power loom, anomaly detection, autoencoder, condition monitoring</pre></div>
+
+  <h3>Figures every strong report has</h3>
+  <ul>
+    <li>End-to-end architecture diagram</li>
+    <li>Photo of the microphone setup on a loom (with permission)</li>
+    <li>Waveform and spectrogram, healthy versus fault</li>
+    <li>Pick-cycle boundaries drawn over a waveform</li>
+    <li>Healthy template and residual heatmap</li>
+    <li>Model comparison bar chart with error bars</li>
+    <li>Confusion matrix</li>
+    <li>Metric versus noise level curve</li>
+    <li>Health index over time with the early-warning moment marked</li>
+    <li>Dashboard screenshots</li>
+    <li>Cost sensitivity plot</li>
+  </ul>
+
+  <h3>Timeline</h3>
+  <div class="tw"><table>
+    <tr><th>Week</th><th>Focus</th><th>Phases</th><th>Milestone</th></tr>
+    <tr><td>1</td><td>Setup, permissions, first recordings, simulator</td><td>1, 2</td><td>Repository running, first audio in</td></tr>
+    <tr><td>2</td><td>Data collection continues, EDA</td><td>3</td><td>Data card draft</td></tr>
+    <tr><td>3</td><td>Cycle segmentation and features</td><td>4, 5</td><td>Residual heatmaps working</td></tr>
+    <tr><td>4</td><td>Baselines</td><td>6</td><td>Baseline table, review with guide</td></tr>
+    <tr><td>5</td><td>Deep models, ablations</td><td>7</td><td>Best model chosen</td></tr>
+    <tr><td>6</td><td>Health index, evaluation, robustness</td><td>8, 9</td><td>final_results.json frozen</td></tr>
+    <tr><td>7</td><td>Dashboard, API, edge, tests</td><td>10, 11, 12</td><td>Working demo</td></tr>
+    <tr><td>8</td><td>Report, slides, viva rehearsal</td><td>13</td><td>Submission</td></tr>
+  </table></div>
+
+  <h3>Risk register</h3>
+  <div class="tw"><table>
+    <tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr>
+    <tr><td>No access to a mill or loom</td><td>Medium</td><td>High</td><td>Use public benchmarks and the simulator, state the limitation, offer a recording protocol for future work</td></tr>
+    <tr><td>No fault samples</td><td>High</td><td>High</td><td>Healthy-only anomaly detection, injected faults, progressive-fault simulation</td></tr>
+    <tr><td>Factory noise masks the loom</td><td>High</td><td>Medium</td><td>Close microphone placement, band-pass, noise augmentation, SNR robustness test</td></tr>
+    <tr><td>Overfitting to one machine</td><td>High</td><td>High</td><td>Leave-one-machine-out testing, per-machine templates</td></tr>
+    <tr><td>Data leakage</td><td>Medium</td><td>Severe</td><td>Session-grouped splits, automated leakage audit</td></tr>
+    <tr><td>Compute limits</td><td>Low</td><td>Medium</td><td>Small models, CPU-friendly training, free GPU notebooks if needed</td></tr>
+    <tr><td>Time overrun</td><td>Medium</td><td>Medium</td><td>Freeze results in week 6, treat edge prototype as optional</td></tr>
+  </table></div>
+</div></section>
+
+<section class="part" id="submit"><div class="wrap">
+  <h2>Submission checklist</h2>
+  <p class="lede">Tick items as you finish them. Your progress is saved on this device.</p>
+
+  <h3>Code and data</h3>
+  <label class="chk"><input type="checkbox" data-k="c1"><span>Repository runs from a clean clone using the README quick start</span></label>
+  <label class="chk"><input type="checkbox" data-k="c2"><span>Fixed seeds, pinned requirements, configs in YAML</span></label>
+  <label class="chk"><input type="checkbox" data-k="c3"><span>Metadata file complete, every recording labelled real, public or synthetic</span></label>
+  <label class="chk"><input type="checkbox" data-k="c4"><span>Tests pass and leakage audit passes</span></label>
+  <label class="chk"><input type="checkbox" data-k="c5"><span>make evaluate regenerates every number and figure in the report</span></label>
+  <label class="chk"><input type="checkbox" data-k="c6"><span>Trained model files and a small sample dataset included or linked</span></label>
+
+  <h3>Documents</h3>
+  <label class="chk"><input type="checkbox" data-k="d1"><span>Project report with front matter, all chapters, references and appendices</span></label>
+  <label class="chk"><input type="checkbox" data-k="d2"><span>Abstract of one page and a plagiarism report within your institution's limit</span></label>
+  <label class="chk"><input type="checkbox" data-k="d3"><span>Data card and model card</span></label>
+  <label class="chk"><input type="checkbox" data-k="d4"><span>Software requirements and design documents (use cases, architecture, data flow)</span></label>
+  <label class="chk"><input type="checkbox" data-k="d5"><span>Test plan and test results</span></label>
+  <label class="chk"><input type="checkbox" data-k="d6"><span>User manual for the dashboard and the edge device</span></label>
+  <label class="chk"><input type="checkbox" data-k="d7"><span>Weekly logbook and guide meeting records</span></label>
+  <label class="chk"><input type="checkbox" data-k="d8"><span>Permission letter from the mill and ethics note</span></label>
+
+  <h3>Presentation and demo</h3>
+  <label class="chk"><input type="checkbox" data-k="p1"><span>Slide deck of about 15 slides with speaker notes</span></label>
+  <label class="chk"><input type="checkbox" data-k="p2"><span>Five-minute demo script rehearsed, with an offline fallback</span></label>
+  <label class="chk"><input type="checkbox" data-k="p3"><span>Two-minute demo video recorded as a backup</span></label>
+  <label class="chk"><input type="checkbox" data-k="p4"><span>One-page poster or project summary</span></label>
+  <label class="chk"><input type="checkbox" data-k="p5"><span>Optional: conference-style paper draft of 6 pages</span></label>
+</div></section>
+
+<section class="part" id="viva"><div class="wrap">
+  <h2>Viva preparation</h2>
+  <p class="lede">Open each question and practise answering aloud before you read the model answer. Then adapt the answers to your real results.</p>
+  <details><summary>Why sound instead of vibration?</summary><p>Microphones are cheap, easy to fit without touching the machine, and they pick up many fault types in one sensor. Vibration sensors are more direct but cost more and need mounting on each machine. My work shows how far a microphone alone can go, and I list the trade-off honestly.</p></details>
+  <details><summary>How do you handle noise from neighbouring looms?</summary><p>Close microphone placement, a band-pass filter, noise-mixing augmentation at several signal-to-noise ratios, and a robustness curve showing performance as noise rises. Per-machine templates also absorb each position's constant background.</p></details>
+  <details><summary>What is new in your work?</summary><p>Pick-cycle-synchronous analysis. Instead of arbitrary windows, I align audio to the loom's own cycle and compare against a healthy template, which both improves detection and explains where in the pick the change happened.</p></details>
+  <details><summary>Why anomaly detection rather than classification?</summary><p>Fault examples are rare and new faults appear unannounced. Learning what healthy sounds like needs no fault labels and can flag unseen problems. Classification is added where labels exist, to tell the mechanic what kind of fault it is.</p></details>
+  <details><summary>How do you know you have no data leakage?</summary><p>I split by session and by machine, fit all scalers and thresholds on training data only, and run an automated audit. I also test on leave-one-machine-out, which a leaking pipeline cannot pass.</p></details>
+  <details><summary>Is the synthetic data valid evidence?</summary><p>It is used for controlled stress tests and augmentation, never mixed into real-data metrics, and always labelled. Real and public results are reported separately.</p></details>
+  <details><summary>How is the health index defined and why those thresholds?</summary><p>It is a percentile mapping of the anomaly score against healthy validation data. Thresholds were chosen on validation data to reach a target false-alarm rate, with smoothing and hysteresis to avoid flapping alerts.</p></details>
+  <details><summary>Would this work on a different loom type?</summary><p>The method transfers, but the template and threshold must be learned per machine. My leave-one-machine-out result shows how much performance drops without that calibration, and I recommend a short calibration recording on each new loom.</p></details>
+  <details><summary>What are the limitations?</summary><p>Limited number of machines and fault examples, label quality from maintenance logs, and a single microphone position. Future work includes more mills, multi-microphone arrays and fusion with current or vibration sensing.</p></details>
+  <details><summary>How would a mill actually use this?</summary><p>A low-cost edge unit per loom scores audio continuously and sends a health index to a dashboard. Supervisors see Healthy, Watch and Act states and a ranked fleet list, and maintenance is scheduled for Watch machines before they fail.</p></details>
+  <p>For 30 more questions tailored to your results, run prompt 13.</p>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <p>LoomEar project playbook. Adapt names, institution formats and thresholds to your own course requirements, and have your guide approve the scope before you start collecting data.</p>
+</div></footer>
+
+<script>
+// Loom hero: warp threads plus a waveform that turns red at the fault burst
+(function(){
+  var svg=document.getElementById('loomsvg'),ns='http://www.w3.org/2000/svg',W=1200,H=220,mid=112;
+  var g='';
+  for(var x=10;x<W;x+=14){g+='<line class="warp" x1="'+x+'" y1="0" x2="'+x+'" y2="'+H+'"/>';}
+  var ok=[],fault=[],N=600,split=0.74;
+  for(var i=0;i<=N;i++){
+    var t=i/N,x=t*W;
+    var pick=Math.pow(Math.max(0,Math.sin(t*Math.PI*2*14)),6);
+    var amp=26*pick+6*Math.sin(t*Math.PI*2*70)+3*Math.sin(t*Math.PI*2*160);
+    if(t>split){var k=(t-split)/(1-split);amp+=(14*Math.sin(t*Math.PI*2*190)+10*Math.sin(t*Math.PI*2*37))*Math.min(1,k*3)*(0.5+0.5*Math.sin(t*Math.PI*2*14));}
+    var y=mid-amp,p=x.toFixed(1)+' '+y.toFixed(1);
+    if(t<=split+0.002)ok.push(p);
+    if(t>=split)fault.push(p);
+  }
+  g+='<path class="ok" id="pok" d="M'+ok.join(' L')+'"/><path class="fault" id="pfa" d="M'+fault.join(' L')+'"/>';
+  svg.innerHTML=g;
+  ['pok','pfa'].forEach(function(id){var el=document.getElementById(id);el.style.setProperty('--len',Math.ceil(el.getTotalLength())+2);});
+})();
+
+// Copy buttons for prompt blocks
+document.querySelectorAll('.prompt').forEach(function(b){
+  var btn=document.createElement('button');btn.type='button';btn.textContent='Copy prompt';
+  b.querySelector('header').appendChild(btn);
+  btn.addEventListener('click',function(){
+    var text=b.querySelector('pre').innerText;
+    function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy prompt';},1600);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fallback);}else{fallback();}
+    function fallback(){var r=document.createRange();r.selectNodeContents(b.querySelector('pre'));var s=window.getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');done();}catch(e){btn.textContent='Select and copy';}s.removeAllRanges();}
+  });
+});
+
+// Checklist progress, saved per browser
+(function(){
+  var boxes=[].slice.call(document.querySelectorAll('.chk input')),key='loomear-checklist';
+  var saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}');}catch(e){}
+  boxes.forEach(function(b){b.checked=!!saved[b.dataset.k];b.addEventListener('change',function(){saved[b.dataset.k]=b.checked;try{localStorage.setItem(key,JSON.stringify(saved));}catch(e){}update();});});
+  function update(){var n=boxes.filter(function(b){return b.checked;}).length,p=Math.round(100*n/boxes.length);
+    document.getElementById('progbar').style.width=p+'%';
+    document.getElementById('prog').firstChild.nodeValue='Progress '+p+'%';}
+  update();
+})();
+</script>
+</body>
+</html>

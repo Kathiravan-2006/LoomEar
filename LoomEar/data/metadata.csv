@@ -1,0 +1,145 @@
+file_id,source_type,machine_id,loom_type,rpm,session_id,date,shift,mic_position,condition,fault_type,label_source,snr_db,notes
+synth_0001,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-H01,2026-03-11,Shift_A,35cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0002,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-H01,2026-03-11,Shift_A,35cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0003,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-H02,2026-03-12,Shift_B,35cm_drive_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0004,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-H02,2026-03-12,Shift_B,35cm_drive_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0005,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-H03,2026-03-13,Shift_A,35cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0006,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-H03,2026-03-13,Shift_A,35cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0007,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-H01,2026-03-11,Shift_A,40cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0008,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-H01,2026-03-11,Shift_A,40cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0009,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-H02,2026-03-12,Shift_B,40cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0010,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-H02,2026-03-12,Shift_B,40cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0011,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-H03,2026-03-13,Shift_A,40cm_drive_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0012,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-H03,2026-03-13,Shift_A,40cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0013,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-H01,2026-03-11,Shift_A,45cm_weft_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0014,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-H01,2026-03-11,Shift_A,45cm_weft_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0015,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-H02,2026-03-12,Shift_B,45cm_weft_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0016,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-H02,2026-03-12,Shift_B,45cm_weft_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0017,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-H03,2026-03-13,Shift_A,45cm_weft_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0018,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-H03,2026-03-13,Shift_A,45cm_weft_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0019,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-H01,2026-03-11,Shift_A,30cm_front_sley,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0020,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-H01,2026-03-11,Shift_A,30cm_front_sley,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0021,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-H02,2026-03-12,Shift_B,30cm_front_sley,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0022,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-H02,2026-03-12,Shift_B,30cm_front_sley,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0023,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-H03,2026-03-13,Shift_A,30cm_front_sley,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0024,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-H03,2026-03-13,Shift_A,30cm_front_sley,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0025,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-H01,2026-03-11,Shift_A,35cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0026,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-H01,2026-03-11,Shift_A,35cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0027,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-H02,2026-03-12,Shift_B,35cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0028,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-H02,2026-03-12,Shift_B,35cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0029,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-H03,2026-03-13,Shift_A,35cm_drive_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0030,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-H03,2026-03-13,Shift_A,35cm_drive_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0031,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-H01,2026-03-11,Shift_A,38cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0032,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-H01,2026-03-11,Shift_A,38cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0033,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-H02,2026-03-12,Shift_B,38cm_drive_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0034,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-H02,2026-03-12,Shift_B,38cm_drive_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0035,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-H03,2026-03-13,Shift_A,38cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0036,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-H03,2026-03-13,Shift_A,38cm_drive_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0037,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-H01,2026-03-11,Shift_A,30cm_front_sley,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0038,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-H01,2026-03-11,Shift_A,30cm_front_sley,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0039,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-H02,2026-03-12,Shift_B,30cm_front_sley,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0040,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-H02,2026-03-12,Shift_B,30cm_front_sley,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0041,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-H03,2026-03-13,Shift_A,30cm_front_sley,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0042,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-H03,2026-03-13,Shift_A,30cm_front_sley,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0043,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-H01,2026-03-11,Shift_A,45cm_weft_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0044,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-H01,2026-03-11,Shift_A,45cm_weft_side,healthy,none,injected,15.0,Healthy operational baseline recording
+synth_0045,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-H02,2026-03-12,Shift_B,45cm_weft_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0046,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-H02,2026-03-12,Shift_B,45cm_weft_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0047,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-H03,2026-03-13,Shift_A,45cm_weft_side,healthy,none,injected,12.0,Healthy operational baseline recording
+synth_0048,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-H03,2026-03-13,Shift_A,45cm_weft_side,healthy,none,injected,20.0,Healthy operational baseline recording
+synth_0049,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-BEAR,2026-03-18,Shift_C,35cm_drive_side,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0050,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-BEAR,2026-03-18,Shift_C,35cm_drive_side,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0051,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-TIMI,2026-03-18,Shift_C,35cm_drive_side,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0052,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-TIMI,2026-03-18,Shift_C,35cm_drive_side,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0053,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-BELT,2026-03-18,Shift_C,35cm_drive_side,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0054,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-BELT,2026-03-18,Shift_C,35cm_drive_side,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0055,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-LUBR,2026-03-18,Shift_C,35cm_drive_side,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0056,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-LUBR,2026-03-18,Shift_C,35cm_drive_side,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0057,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-BEAT,2026-03-18,Shift_C,35cm_drive_side,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0058,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-BEAT,2026-03-18,Shift_C,35cm_drive_side,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0059,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-LOOS,2026-03-18,Shift_C,35cm_drive_side,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0060,synthetic,LOOM-01,rapier,210.0,SESS-LOOM-01-LOOS,2026-03-18,Shift_C,35cm_drive_side,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)
+synth_0061,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-BEAR,2026-03-18,Shift_C,40cm_drive_side,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0062,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-BEAR,2026-03-18,Shift_C,40cm_drive_side,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0063,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-TIMI,2026-03-18,Shift_C,40cm_drive_side,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0064,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-TIMI,2026-03-18,Shift_C,40cm_drive_side,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0065,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-BELT,2026-03-18,Shift_C,40cm_drive_side,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0066,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-BELT,2026-03-18,Shift_C,40cm_drive_side,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0067,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-LUBR,2026-03-18,Shift_C,40cm_drive_side,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0068,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-LUBR,2026-03-18,Shift_C,40cm_drive_side,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0069,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-BEAT,2026-03-18,Shift_C,40cm_drive_side,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0070,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-BEAT,2026-03-18,Shift_C,40cm_drive_side,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0071,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-LOOS,2026-03-18,Shift_C,40cm_drive_side,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0072,synthetic,LOOM-02,rapier,215.0,SESS-LOOM-02-LOOS,2026-03-18,Shift_C,40cm_drive_side,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)
+synth_0073,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-BEAR,2026-03-18,Shift_C,45cm_weft_side,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0074,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-BEAR,2026-03-18,Shift_C,45cm_weft_side,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0075,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-TIMI,2026-03-18,Shift_C,45cm_weft_side,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0076,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-TIMI,2026-03-18,Shift_C,45cm_weft_side,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0077,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-BELT,2026-03-18,Shift_C,45cm_weft_side,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0078,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-BELT,2026-03-18,Shift_C,45cm_weft_side,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0079,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-LUBR,2026-03-18,Shift_C,45cm_weft_side,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0080,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-LUBR,2026-03-18,Shift_C,45cm_weft_side,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0081,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-BEAT,2026-03-18,Shift_C,45cm_weft_side,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0082,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-BEAT,2026-03-18,Shift_C,45cm_weft_side,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0083,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-LOOS,2026-03-18,Shift_C,45cm_weft_side,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0084,synthetic,LOOM-03,projectile,195.0,SESS-LOOM-03-LOOS,2026-03-18,Shift_C,45cm_weft_side,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)
+synth_0085,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-BEAR,2026-03-18,Shift_C,30cm_front_sley,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0086,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-BEAR,2026-03-18,Shift_C,30cm_front_sley,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0087,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-TIMI,2026-03-18,Shift_C,30cm_front_sley,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0088,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-TIMI,2026-03-18,Shift_C,30cm_front_sley,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0089,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-BELT,2026-03-18,Shift_C,30cm_front_sley,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0090,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-BELT,2026-03-18,Shift_C,30cm_front_sley,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0091,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-LUBR,2026-03-18,Shift_C,30cm_front_sley,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0092,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-LUBR,2026-03-18,Shift_C,30cm_front_sley,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0093,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-BEAT,2026-03-18,Shift_C,30cm_front_sley,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0094,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-BEAT,2026-03-18,Shift_C,30cm_front_sley,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0095,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-LOOS,2026-03-18,Shift_C,30cm_front_sley,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0096,synthetic,LOOM-04,air-jet,240.0,SESS-LOOM-04-LOOS,2026-03-18,Shift_C,30cm_front_sley,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)
+synth_0097,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-BEAR,2026-03-18,Shift_C,35cm_drive_side,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0098,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-BEAR,2026-03-18,Shift_C,35cm_drive_side,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0099,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-TIMI,2026-03-18,Shift_C,35cm_drive_side,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0100,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-TIMI,2026-03-18,Shift_C,35cm_drive_side,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0101,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-BELT,2026-03-18,Shift_C,35cm_drive_side,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0102,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-BELT,2026-03-18,Shift_C,35cm_drive_side,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0103,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-LUBR,2026-03-18,Shift_C,35cm_drive_side,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0104,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-LUBR,2026-03-18,Shift_C,35cm_drive_side,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0105,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-BEAT,2026-03-18,Shift_C,35cm_drive_side,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0106,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-BEAT,2026-03-18,Shift_C,35cm_drive_side,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0107,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-LOOS,2026-03-18,Shift_C,35cm_drive_side,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0108,synthetic,LOOM-05,rapier,210.0,SESS-LOOM-05-LOOS,2026-03-18,Shift_C,35cm_drive_side,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)
+synth_0109,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-BEAR,2026-03-18,Shift_C,38cm_drive_side,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0110,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-BEAR,2026-03-18,Shift_C,38cm_drive_side,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0111,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-TIMI,2026-03-18,Shift_C,38cm_drive_side,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0112,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-TIMI,2026-03-18,Shift_C,38cm_drive_side,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0113,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-BELT,2026-03-18,Shift_C,38cm_drive_side,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0114,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-BELT,2026-03-18,Shift_C,38cm_drive_side,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0115,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-LUBR,2026-03-18,Shift_C,38cm_drive_side,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0116,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-LUBR,2026-03-18,Shift_C,38cm_drive_side,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0117,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-BEAT,2026-03-18,Shift_C,38cm_drive_side,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0118,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-BEAT,2026-03-18,Shift_C,38cm_drive_side,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0119,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-LOOS,2026-03-18,Shift_C,38cm_drive_side,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0120,synthetic,LOOM-06,rapier,208.0,SESS-LOOM-06-LOOS,2026-03-18,Shift_C,38cm_drive_side,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)
+synth_0121,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-BEAR,2026-03-18,Shift_C,30cm_front_sley,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0122,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-BEAR,2026-03-18,Shift_C,30cm_front_sley,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0123,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-TIMI,2026-03-18,Shift_C,30cm_front_sley,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0124,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-TIMI,2026-03-18,Shift_C,30cm_front_sley,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0125,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-BELT,2026-03-18,Shift_C,30cm_front_sley,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0126,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-BELT,2026-03-18,Shift_C,30cm_front_sley,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0127,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-LUBR,2026-03-18,Shift_C,30cm_front_sley,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0128,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-LUBR,2026-03-18,Shift_C,30cm_front_sley,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0129,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-BEAT,2026-03-18,Shift_C,30cm_front_sley,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0130,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-BEAT,2026-03-18,Shift_C,30cm_front_sley,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0131,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-LOOS,2026-03-18,Shift_C,30cm_front_sley,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0132,synthetic,LOOM-07,air-jet,245.0,SESS-LOOM-07-LOOS,2026-03-18,Shift_C,30cm_front_sley,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)
+synth_0133,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-BEAR,2026-03-18,Shift_C,45cm_weft_side,watch,bearing_wear,injected,15.0,Early stage developing bearing_wear (severity 0.35)
+synth_0134,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-BEAR,2026-03-18,Shift_C,45cm_weft_side,fault,bearing_wear,injected,10.0,Critical developed bearing_wear (severity 0.85)
+synth_0135,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-TIMI,2026-03-18,Shift_C,45cm_weft_side,watch,timing_drift,injected,15.0,Early stage developing timing_drift (severity 0.35)
+synth_0136,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-TIMI,2026-03-18,Shift_C,45cm_weft_side,fault,timing_drift,injected,10.0,Critical developed timing_drift (severity 0.85)
+synth_0137,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-BELT,2026-03-18,Shift_C,45cm_weft_side,watch,belt_squeal,injected,15.0,Early stage developing belt_squeal (severity 0.35)
+synth_0138,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-BELT,2026-03-18,Shift_C,45cm_weft_side,fault,belt_squeal,injected,10.0,Critical developed belt_squeal (severity 0.85)
+synth_0139,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-LUBR,2026-03-18,Shift_C,45cm_weft_side,watch,lubrication_loss,injected,15.0,Early stage developing lubrication_loss (severity 0.35)
+synth_0140,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-LUBR,2026-03-18,Shift_C,45cm_weft_side,fault,lubrication_loss,injected,10.0,Critical developed lubrication_loss (severity 0.85)
+synth_0141,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-BEAT,2026-03-18,Shift_C,45cm_weft_side,watch,beatup_looseness,injected,15.0,Early stage developing beatup_looseness (severity 0.35)
+synth_0142,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-BEAT,2026-03-18,Shift_C,45cm_weft_side,fault,beatup_looseness,injected,10.0,Critical developed beatup_looseness (severity 0.85)
+synth_0143,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-LOOS,2026-03-18,Shift_C,45cm_weft_side,watch,loose_frame,injected,15.0,Early stage developing loose_frame (severity 0.35)
+synth_0144,synthetic,LOOM-08,projectile,190.0,SESS-LOOM-08-LOOS,2026-03-18,Shift_C,45cm_weft_side,fault,loose_frame,injected,10.0,Critical developed loose_frame (severity 0.85)

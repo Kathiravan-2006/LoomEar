@@ -1,0 +1,298 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run LoomEar tests",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' -m pytest tests -v"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Run LoomEar tests",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$python = 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe'; Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & $python -m pip install -r requirements.txt; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; & $python -m pytest tests -v"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Install LoomEar verification dependencies",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' -m pip install -r requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Retry LoomEar dependency install",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' -m pip install --default-timeout=180 -r requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run LoomEar tests after fixes",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' -m pytest tests -v"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Verify LoomEar suite after SHAP fix",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' -m pytest tests -v"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Audit LoomEar data leakage",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' scripts\\audit_leakage.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Run LoomEar EDA and training in temp copy",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"$source = 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; $destination = Join-Path $env:TEMP ('LoomEar-verify-' + [guid]::NewGuid().ToString('N')); New-Item -ItemType Directory -Path $destination | Out-Null; Get-ChildItem -LiteralPath $source -Force | Where-Object { $_.Name -notin @('.venv', '.pytest_cache') } | Copy-Item -Destination $destination -Recurse -Force; Write-Output ('VERIFY_COPY=' + $destination); Set-Location $destination; $python = 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe'; & $python scripts\\run_eda.py; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; & $python scripts\\train_and_evaluate.py; exit $LASTEXITCODE"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "EDA and train on verification copy",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"C:\\Users\\prave\\AppData\\Local\\Temp\\loomear_verify_copy.ps1"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Verify API sample-rate handling",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' -m pytest tests\\test_api.py -v"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Final LoomEar full test suite",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'; & 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe' -m pytest tests -v"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Run LoomEar edge benchmark in copy",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Set-Location 'C:\\Users\\prave\\AppData\\Local\\Temp\\LoomEar-verify-433245d4ac7e4dfebb84e244fc9db23b'; $python = 'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe'; & $python edge\\benchmark.py; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; & $python edge\\record_and_score.py --machine-id LOOM-01 --max-cycles 5; exit $LASTEXITCODE"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run LoomEar benchmark",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe",
+			"args": [
+				"C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar\\edge\\benchmark.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run LoomEar edge monitor safely",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"import sys; sys.path.insert(0, r'C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar'); from edge.record_and_score import run_edge_monitor; run_edge_monitor(machine_id='LOOM-01', max_cycles=5, output_csv=r'C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-edge-verify.csv')"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run LoomEar edge monitor safely",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe",
+			"args": [
+				"C:\\Users\\prave\\AppData\\Local\\Temp\\loomear_run_edge_verify.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Run LoomEar edge monitor via helper",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe",
+			"args": [
+				"C:\\Users\\prave\\AppData\\Local\\Temp\\loomear_run_edge_verify.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start LoomEar dashboard",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"C:\\Users\\prave\\AppData\\Local\\Temp\\start_loomear_dashboard.ps1"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Check machine overlap in session split",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe",
+			"args": [
+				"C:\\Users\\prave\\AppData\\Local\\Temp\\loomear_check_machine_overlap.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Check LoomEar runner help",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe",
+			"args": [
+				"C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar\\run_project.py",
+				"--help"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Verify edge export output in copy",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-verify-venv\\Scripts\\python.exe",
+			"args": [
+				"C:\\Users\\prave\\AppData\\Local\\Temp\\loomear_verify_export.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Verify documented LoomEar environment setup",
+			"type": "shell",
+			"command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-File",
+				"C:\\Users\\prave\\AppData\\Local\\Temp\\setup_loomear_documented_env.ps1"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Validate README venv test suite",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-venv\\Scripts\\python.exe",
+			"args": [
+				"C:\\Users\\prave\\Downloads\\LoomEar\\LoomEar\\-m",
+				"pytest",
+				"tests",
+				"-v"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Check documented venv imports",
+			"type": "shell",
+			"command": "C:\\Users\\prave\\AppData\\Local\\Temp\\loomear-venv\\Scripts\\python.exe",
+			"args": [
+				"-c",
+				"import librosa, numpy; print('librosa', librosa.__version__); print('numpy', numpy.__version__)"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

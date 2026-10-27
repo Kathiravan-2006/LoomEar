@@ -1,0 +1,7 @@
+{
+  "figure_name": "04_cycle_boundaries_alignment.png",
+  "caption": "Waveform with detected pick-cycle boundaries anchored on recurring mechanical beat-up impacts.",
+  "source_type": "synthetic",
+  "units": "Normalized amplitude, Frequency (Hz), Time (s)",
+  "dpi": 300
+}

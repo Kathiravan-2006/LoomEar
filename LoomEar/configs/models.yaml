@@ -1,0 +1,53 @@
+# LoomEar Model Configuration
+seed: 42
+
+baselines:
+  heuristic:
+    rms_p95_mult: 1.5
+    kurtosis_threshold: 4.5
+  pca:
+    n_components: 8
+  isolation_forest:
+    n_estimators: 150
+    contamination: 0.05
+    random_state: 42
+  ocsvm:
+    kernel: "rbf"
+    nu: 0.05
+    gamma: "scale"
+  random_forest:
+    n_estimators: 200
+    max_depth: 12
+    class_weight: "balanced"
+    random_state: 42
+  xgboost:
+    n_estimators: 150
+    max_depth: 6
+    learning_rate: 0.08
+    random_state: 42
+
+autoencoder:
+  latent_dim: 32
+  channels: [16, 32, 64]
+  kernel_size: 3
+  epochs: 40
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  early_stopping_patience: 8
+
+health:
+  healthy_baseline_percentile: 90.0
+  watch_threshold_index: 60.0
+  act_threshold_index: 80.0
+  ewma_alpha: 0.25
+  hysteresis_consecutive_cycles: 4
+  target_false_alarm_rate: 0.03
+
+cost_model:
+  downtime_cost_per_hour_usd: 120.0
+  unplanned_downtime_hours_per_year: 75.0
+  early_detection_rate: 0.78
+  false_alarm_investigation_cost_usd: 25.0
+  annual_sensor_edge_cost_usd: 65.0
+  num_looms: 24

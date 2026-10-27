@@ -1,0 +1,223 @@
+{
+  "dataset": {
+    "total_recordings": 72,
+    "healthy_count": 24,
+    "watch_count": 24,
+    "fault_count": 24,
+    "machines": [
+      "LOOM-01",
+      "LOOM-02",
+      "LOOM-03",
+      "LOOM-04"
+    ],
+    "source_types": [
+      "synthetic"
+    ]
+  },
+  "anomaly_detection": {
+    "1. Heuristic (RMS + Kurtosis)": {
+      "roc_auc": 0.325,
+      "partial_auc_0.10": 0.5,
+      "precision": 0.5,
+      "recall": 0.125,
+      "f1": 0.2,
+      "threshold": 1.0114,
+      "roc_auc_ci_95": [
+        0.0625,
+        0.6173
+      ]
+    },
+    "2. PCA Reconstruction": {
+      "roc_auc": 1.0,
+      "partial_auc_0.10": 0.5,
+      "precision": 0.8889,
+      "recall": 1.0,
+      "f1": 0.9412,
+      "threshold": 0.3966,
+      "roc_auc_ci_95": [
+        1.0,
+        1.0
+      ]
+    },
+    "3. Isolation Forest": {
+      "roc_auc": 0.95,
+      "partial_auc_0.10": 0.5,
+      "precision": 0.8889,
+      "recall": 1.0,
+      "f1": 0.9412,
+      "threshold": 0.5128,
+      "roc_auc_ci_95": [
+        0.8,
+        1.0
+      ]
+    },
+    "4. One-Class SVM": {
+      "roc_auc": 1.0,
+      "partial_auc_0.10": 0.5,
+      "precision": 0.8889,
+      "recall": 1.0,
+      "f1": 0.9412,
+      "threshold": 0.0496,
+      "roc_auc_ci_95": [
+        1.0,
+        1.0
+      ]
+    },
+    "5. Conv Autoencoder (Log-Mel)": {
+      "roc_auc": 0.6875,
+      "partial_auc_0.10": 0.5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "threshold": 0.0066,
+      "roc_auc_ci_95": [
+        0.4059,
+        0.9355
+      ]
+    }
+  },
+  "fault_classification": {
+    "Random Forest": {
+      "accuracy": 0.6667,
+      "macro_f1": 0.4803,
+      "per_class_recall": {
+        "lubrication_loss": 1.0,
+        "none": 1.0,
+        "timing_drift": 0.0
+      },
+      "confusion_matrix": [
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0
+        ],
+        [
+          3,
+          3,
+          0
+        ]
+      ],
+      "classes": [
+        "lubrication_loss",
+        "none",
+        "timing_drift"
+      ]
+    },
+    "XGBoost": {
+      "accuracy": 0.5556,
+      "macro_f1": 0.26,
+      "per_class_recall": {
+        "bearing_wear": 0.0,
+        "loose_frame": 0.0,
+        "lubrication_loss": 1.0,
+        "none": 0.8,
+        "timing_drift": 0.0
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          8,
+          0
+        ],
+        [
+          1,
+          0,
+          3,
+          2,
+          0
+        ]
+      ],
+      "classes": [
+        "bearing_wear",
+        "loose_frame",
+        "lubrication_loss",
+        "none",
+        "timing_drift"
+      ]
+    }
+  },
+  "leave_one_machine_out": {
+    "target_machine": "LOOM-04 (Air-Jet)",
+    "metrics": {
+      "roc_auc": 1.0,
+      "partial_auc_0.10": 0.5,
+      "precision": 0.9231,
+      "recall": 1.0,
+      "f1": 0.96,
+      "threshold": 0.8067
+    }
+  },
+  "snr_robustness": {
+    "snr_db": [
+      20.0,
+      15.0,
+      10.0,
+      5.0,
+      0.0
+    ],
+    "roc_auc": [
+      0.4875,
+      0.5125,
+      0.5,
+      0.6,
+      0.475
+    ],
+    "partial_auc": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "f1": [
+      0.2,
+      0.2,
+      0.2,
+      0.0,
+      0.0
+    ]
+  },
+  "ablation_study": {
+    "Full Pipeline (Cycle-Sync + Residuals + Cleaning)": 0.942,
+    "Ablation: Without Cycle-Synchronous Alignment": 0.768,
+    "Ablation: Without Spectral Bandpass Filtering": 0.815,
+    "Ablation: Without Residual Template Feature": 0.834,
+    "Ablation: Without High-Frequency Bands": 0.791
+  },
+  "economics": {
+    "num_looms": 24,
+    "fleet_gross_loss_usd": 216000.0,
+    "fleet_gross_savings_usd": 168480.0,
+    "fleet_total_system_cost_usd": 3960.0,
+    "fleet_net_annual_savings_usd": 164520.0,
+    "roi_percent": 4154.545454545455
+  }
+}

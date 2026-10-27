@@ -1,0 +1,12 @@
+{
+  "model_name": "loomear_detector",
+  "framework": "LoomEar Edge Runtime",
+  "input_shape": [
+    1,
+    64,
+    64
+  ],
+  "sample_rate": 16000,
+  "quantized": true,
+  "precision": "int8_weights_float32_acts"
+}

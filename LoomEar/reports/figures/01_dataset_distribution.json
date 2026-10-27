@@ -1,0 +1,7 @@
+{
+  "figure_name": "01_dataset_distribution.png",
+  "caption": "Distribution of loom acoustic dataset partitioned by operational condition, machine ID, and physical fault mode.",
+  "source_type": "synthetic",
+  "units": "Normalized amplitude, Frequency (Hz), Time (s)",
+  "dpi": 300
+}
